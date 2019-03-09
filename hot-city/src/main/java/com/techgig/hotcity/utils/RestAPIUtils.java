@@ -1,10 +1,6 @@
 package com.techgig.hotcity.utils;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.security.GeneralSecurityException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,7 +10,6 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
@@ -25,9 +20,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.techgig.hotcity.exception.CityNotFoundException;
@@ -44,12 +37,9 @@ public class RestAPIUtils {
 	private Integer timeOut;
 
 	@PostConstruct
-	public void init()
-			throws GeneralSecurityException, URISyntaxException, JsonMappingException, JsonParseException, IOException {
+	public void init() {
 
 		HttpComponentsClientHttpRequestFactory conFact = new HttpComponentsClientHttpRequestFactory();
-		conFact.setReadTimeout(timeOut);
-		conFact.setConnectTimeout(timeOut);
 		template = new RestTemplate(conFact);
 		template.setMessageConverters(getMessageConverters());
 	}
@@ -74,8 +64,8 @@ public class RestAPIUtils {
 	public Object getWeatherResponse(String cityName) throws Exception {
 		Object response = null;
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("q", cityName);
-		params.put("APPID", "7b66d0223cb38764b89fa93386442271");
+		params.put("cityName", cityName);
+		params.put("appKey", "7b66d0223cb38764b89fa93386442271");
 		try {
 			HttpEntity requestEntity = new HttpEntity(getHttpHeaders());
 			ResponseEntity<Object> responseEntity = template.getForEntity(weatherEndpoint, Object.class, params);
