@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.techgig.hotcity.request.WeatherRequest;
 import com.techgig.hotcity.request.WeatherResponse;
-import com.techgig.hotcity.service.HotCityService;
+import com.techgig.hotcity.service.WeatherForecastService;
 
 @RestController
 @RequestMapping(path = "/api/v1/hotcity")
 public class HotCityController {
 	
 	@Autowired
-	private HotCityService service;
+	private WeatherForecastService service;
 	
 	@PostMapping(path = "/forecast")
 	public ResponseEntity<WeatherResponse> postWeatherRequest(@RequestBody WeatherRequest request){

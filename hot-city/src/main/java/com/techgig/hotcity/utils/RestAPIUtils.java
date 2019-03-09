@@ -61,21 +61,22 @@ public class RestAPIUtils {
 		return tmpHeaders;
 	}
 
-	public Object getWeatherResponse(String cityName) throws Exception {
-		Object response = null;
+	public Map<String, Object> getWeatherResponse(String cityName) throws Exception {
+		Map<String, Object> response = null;
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("cityName", cityName);
 		params.put("appKey", "7b66d0223cb38764b89fa93386442271");
+		params.put("noOfDays", "1");
 		try {
 			HttpEntity requestEntity = new HttpEntity(getHttpHeaders());
-			ResponseEntity<Object> responseEntity = template.getForEntity(weatherEndpoint, Object.class, params);
+			ResponseEntity<HashMap> responseEntity = template.getForEntity(weatherEndpoint, HashMap.class, params);
 			response = responseEntity.getBody();
 		} catch (HttpStatusCodeException httpStatusExp) {
 			if (httpStatusExp.getStatusCode().is4xxClientError()) {
 				throw new CityNotFoundException("This city " + cityName + " weather is missing in OPEN Weather API");
 			}
 		} catch (RestClientException exp) {
-			throw new Exception("Error in Getting the response for URL: " + weatherEndpoint, exp);
+			throw new Exception("Bad response from " + weatherEndpoint, exp);
 		}
 		return response;
 	}
