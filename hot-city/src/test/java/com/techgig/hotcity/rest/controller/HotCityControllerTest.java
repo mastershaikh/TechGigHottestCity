@@ -13,7 +13,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.techgig.hotcity.request.WeatherRequest;
@@ -21,7 +20,6 @@ import com.techgig.hotcity.request.WeatherResponse;
 import com.techgig.hotcity.service.WeatherForecastService;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest(value = WeatherForecastService.class)
 public class HotCityControllerTest {
 
 	@InjectMocks
