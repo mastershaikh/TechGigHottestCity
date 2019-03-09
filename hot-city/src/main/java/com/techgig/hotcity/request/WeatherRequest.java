@@ -4,12 +4,19 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class WeatherRequest implements Serializable {
 
 	private static final long serialVersionUID = 9000395924971080566L;
 
+	@JsonProperty(value = "city_list", required = true)
 	private List<String> cityList;
+	
+	@JsonProperty(value = "from_date", required = false)
 	private LocalDateTime fromDateTime;
+	
+	@JsonProperty(value = "to_date", required = false)
 	private LocalDateTime toDateTime;
 
 	public List<String> getCityList() {

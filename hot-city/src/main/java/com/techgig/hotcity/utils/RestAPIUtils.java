@@ -69,7 +69,6 @@ public class RestAPIUtils {
 		HttpHeaders tmpHeaders = new HttpHeaders();
 		tmpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		tmpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
-		tmpHeaders.set("appid", "b6907d289e10d714a6e88b30761fae22");
 		return tmpHeaders;
 	}
 
@@ -77,7 +76,7 @@ public class RestAPIUtils {
 		Object response = null;
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("q", cityName);
-		params.put("appid", "b6907d289e10d714a6e88b30761fae22");
+		params.put("appid", "7b66d0223cb38764b89fa93386442271");
 		try {
 			HttpEntity requestEntity = new HttpEntity(getHttpHeaders());
 			ResponseEntity<Object> responseEntity = template.exchange(weatherEndpoint, HttpMethod.GET, 
