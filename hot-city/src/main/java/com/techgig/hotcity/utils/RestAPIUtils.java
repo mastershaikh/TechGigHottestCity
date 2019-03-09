@@ -67,8 +67,7 @@ public class RestAPIUtils {
 
 	private HttpHeaders getHttpHeaders() {
 		HttpHeaders tmpHeaders = new HttpHeaders();
-		tmpHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		tmpHeaders.setContentType(MediaType.APPLICATION_JSON_UTF8);
+		tmpHeaders.setContentType(MediaType.APPLICATION_JSON);
 		return tmpHeaders;
 	}
 
@@ -76,11 +75,10 @@ public class RestAPIUtils {
 		Object response = null;
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("q", cityName);
-		params.put("appid", "7b66d0223cb38764b89fa93386442271");
+		params.put("APPID", "7b66d0223cb38764b89fa93386442271");
 		try {
 			HttpEntity requestEntity = new HttpEntity(getHttpHeaders());
-			ResponseEntity<Object> responseEntity = template.exchange(weatherEndpoint, HttpMethod.GET, 
-					requestEntity, Object.class, params);
+			ResponseEntity<Object> responseEntity = template.getForEntity(weatherEndpoint, Object.class, params);
 			response = responseEntity.getBody();
 		} catch (HttpStatusCodeException httpStatusExp) {
 			if (httpStatusExp.getStatusCode().is4xxClientError()) {
