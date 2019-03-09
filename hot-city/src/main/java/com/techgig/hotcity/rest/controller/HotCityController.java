@@ -15,15 +15,13 @@ import com.techgig.hotcity.service.WeatherForecastService;
 @RestController
 @RequestMapping(path = "/api/v1/hotcity")
 public class HotCityController {
-	
+
 	@Autowired
 	private WeatherForecastService service;
-	
+
 	@PostMapping(path = "/forecast")
-	public ResponseEntity<WeatherResponse> postWeatherRequest(@RequestBody WeatherRequest request){
+	public ResponseEntity<WeatherResponse> postWeatherRequest(@RequestBody WeatherRequest request) {
 		WeatherResponse response = service.getWeatherOfCity(request);
-		
 		return new ResponseEntity<>(response, HttpStatus.OK);
-		
 	}
 }
